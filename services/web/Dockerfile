@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y netcat
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./services/web/project/requirements.txt /usr/src/app/requirements.txt
+COPY ./services/web/requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 
 # copy project
