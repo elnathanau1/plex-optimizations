@@ -1,6 +1,5 @@
 # https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx/#gunicorn
 import json
-import os
 
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -103,8 +102,10 @@ def optimize_on_deck(plex_username: str, plex_password: str):
     on_deck: Set[Video] = find_on_deck(plex)
     already_optimized: List[Video] = list(map(lambda x: x.items()[0], plex.optimizedItems()))
 
+    print("Optimizing: ")
     for media in on_deck:
         if media not in already_optimized:
+            print(media)
             media.optimize(targetTagID=3)
             update_optimization_table(Optimization(media.key, OptimizationStatus.PENDING))
 
@@ -118,6 +119,7 @@ def hello_world():
 
 @app.route("/optimize/ondeck")
 def get_optimize_on_deck():
+    print("Starting to optimize on deck")
     try:
         f = open('/config/secrets.json')
     except:
@@ -130,4 +132,5 @@ def get_optimize_on_deck():
         return jsonify(error="PLEX_PASSWORD not found in secrets.json")
 
     optimize_on_deck(secrets["PLEX_USERNAME"], secrets["PLEX_PASSWORD"])
+    print("Finished optimizing on deck")
     return jsonify(success="test")
