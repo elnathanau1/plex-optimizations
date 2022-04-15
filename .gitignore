@@ -1,0 +1,4 @@
+venv/
+sandbox.py
+.DS_STORE
+.idea/
