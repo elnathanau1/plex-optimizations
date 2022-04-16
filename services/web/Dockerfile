@@ -12,14 +12,14 @@ ENV DATABASE_URL postgresql://postgres:postgres@192.168.0.197:5432/postgres
 ENV FLASK_APP project/__init__.py
 ENV FLASK_ENV development
 ENV SQL_HOST 192.168.0.197
-ENV SQL_PORT '5432'
+ENV SQL_PORT 5432
 
 # install system dependencies
 RUN apt-get update && apt-get install -y netcat
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./services/web/requirements.txt /usr/src/app/requirements.txt
+COPY requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 
 # copy project
