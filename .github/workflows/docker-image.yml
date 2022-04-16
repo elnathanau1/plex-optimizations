@@ -27,4 +27,4 @@ jobs:
           context: ./services/web
           file: ./services/web/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/plex-optimizations:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/plex-optimizations:github-master
