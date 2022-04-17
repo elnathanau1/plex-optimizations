@@ -15,7 +15,8 @@ ENV SQL_HOST 192.168.0.197
 ENV SQL_PORT 5432
 
 # install system dependencies
-RUN apt-get update && apt-get install -y netcat
+RUN apt-get update && apt-get install -y netcat && apt-get install tzdata -y
+ENV TZ="America/Chicago"
 
 # install dependencies
 RUN pip install --upgrade pip
